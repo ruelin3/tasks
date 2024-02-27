@@ -10,7 +10,16 @@ export function makeBlankQuestion(
     name: string,
     type: QuestionType
 ): Question {
-    return {};
+    return {
+        id: id,
+        name: name,
+        type: type,
+        body: "",
+        expected: "",
+        options: [],
+        points: 1,
+        published: false
+    };
 }
 
 /**
@@ -21,7 +30,15 @@ export function makeBlankQuestion(
  * HINT: Look up the `trim` and `toLowerCase` functions.
  */
 export function isCorrect(question: Question, answer: string): boolean {
-    return false;
+    answer = answer.toLowerCase();
+    question.expected = question.expected.toLowerCase();
+    answer = answer.trim();
+    question.expected = question.expected.trim();
+
+    if (answer === question.expected) return true;
+    else {
+        return false;
+    }
 }
 
 /**
@@ -31,9 +48,13 @@ export function isCorrect(question: Question, answer: string): boolean {
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
+    if (question.type === "short_answer_question") {
+        return true;
+    } else if (question.type === "multiple_choice_question") {
+        return question.options.includes(answer);
+    }
     return false;
 }
-
 /**
  * Consumes a question and produces a string representation combining the
  * `id` and first 10 characters of the `name`. The two strings should be
@@ -41,7 +62,8 @@ export function isValid(question: Question, answer: string): boolean {
  * name "My First Question" would become "9: My First Q".
  */
 export function toShortForm(question: Question): string {
-    return "";
+    const shortened = question.name.substring(0, 10);
+    return `${question.id}: ${shortened}`;
 }
 
 /**
@@ -62,7 +84,13 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
-    return "";
+    let markdownReps = `# ${question.name}\n${question.body}`;
+    if (question.type === "multiple_choice_question") {
+        question.options.forEach((option) => {
+            markdownReps += `\n- ${option}`;
+        });
+    }
+    return markdownReps;
 }
 
 /**
@@ -70,7 +98,10 @@ export function toMarkdown(question: Question): string {
  * `newName`.
  */
 export function renameQuestion(question: Question, newName: string): Question {
-    return question;
+    return {
+        ...question,
+        name: newName
+    };
 }
 
 /**
@@ -79,7 +110,10 @@ export function renameQuestion(question: Question, newName: string): Question {
  * published; if it was published, now it should be not published.
  */
 export function publishQuestion(question: Question): Question {
-    return question;
+    return {
+        ...question,
+        published: !question.published
+    };
 }
 
 /**
@@ -89,7 +123,13 @@ export function publishQuestion(question: Question): Question {
  * The `published` field should be reset to false.
  */
 export function duplicateQuestion(id: number, oldQuestion: Question): Question {
-    return oldQuestion;
+    const newName = "Copy of " + oldQuestion.name;
+    return {
+        ...oldQuestion,
+        id,
+        name: newName,
+        published: false
+    };
 }
 
 /**
@@ -100,7 +140,13 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
  * Check out the subsection about "Nested Fields" for more information.
  */
 export function addOption(question: Question, newOption: string): Question {
-    return question;
+    const newOptions = [...question.options];
+    newOptions.push(newOption);
+
+    return {
+        ...question,
+        options: newOptions
+    };
 }
 
 /**
@@ -117,5 +163,14 @@ export function mergeQuestion(
     contentQuestion: Question,
     { points }: { points: number }
 ): Question {
-    return contentQuestion;
+    return {
+        id: id,
+        name: name,
+        body: contentQuestion.body,
+        type: contentQuestion.type,
+        options: contentQuestion.options,
+        expected: contentQuestion.expected,
+        points: points,
+        published: false
+    };
 }
