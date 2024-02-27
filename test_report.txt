@@ -11,63 +11,7 @@ Browserslist: caniuse-lite is outdated. Please run:
 Browserslist: caniuse-lite is outdated. Please run:
   npx browserslist@latest --update-db
   Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
-FAIL src/objects.test.ts
-  ● Testing the object functions › Testing the publishQuestion function
-
-    expect(received).toEqual(expected) // deep equality
-
-    - Expected  - 1
-    + Received  + 1
-
-    @@ -1,8 +1,8 @@
-      Object {
-        "body": "What is the last letter of the English alphabet?",
-    -   "expected": "Z",
-    +   "expected": "z",
-        "id": 2,
-        "name": "Letters",
-        "options": Array [],
-        "points": 1,
-        "published": true,
-
-      182 |             published: false
-      183 |         });
-    > 184 |         expect(publishQuestion(LETTER_QUESTION)).toEqual({
-          |                                                  ^
-      185 |             id: 2,
-      186 |             name: "Letters",
-      187 |             body: "What is the last letter of the English alphabet?",
-
-      at Object.<anonymous> (src/objects.test.ts:184:50)
-
-  ● Testing the object functions › Testing the duplicateQuestion function
-
-    expect(received).toEqual(expected) // deep equality
-
-    - Expected  - 1
-    + Received  + 1
-
-    @@ -1,8 +1,8 @@
-      Object {
-        "body": "What is the last letter of the English alphabet?",
-    -   "expected": "Z",
-    +   "expected": "z",
-        "id": 55,
-        "name": "Copy of Letters",
-        "options": Array [],
-        "points": 1,
-        "published": false,
-
-      217 |             published: false
-      218 |         });
-    > 219 |         expect(duplicateQuestion(55, LETTER_QUESTION)).toEqual({
-          |                                                        ^
-      220 |             id: 55,
-      221 |             name: "Copy of Letters",
-      222 |             body: "What is the last letter of the English alphabet?",
-
-      at Object.<anonymous> (src/objects.test.ts:219:56)
-
+PASS src/objects.test.ts
 PASS src/arrays.test.ts
 PASS src/functions.test.ts
 PASS src/HtmlCss.test.tsx
@@ -76,18 +20,18 @@ PASS src/App.test.tsx
 ----------------|---------|----------|---------|---------|-------------------
 File            | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 ----------------|---------|----------|---------|---------|-------------------
-All files       |   97.53 |    97.22 |     100 |   97.33 |                   
- src            |   97.53 |    97.22 |     100 |   97.33 |                   
+All files       |    97.4 |    97.05 |     100 |   97.22 |                   
+ src            |    97.4 |    97.05 |     100 |   97.22 |                   
   App.tsx       |     100 |      100 |     100 |     100 |                   
   arrays.ts     |   97.36 |      100 |     100 |   96.96 | 15                
   functions.ts  |     100 |      100 |     100 |     100 |                   
-  objects.ts    |   96.42 |     87.5 |     100 |   96.29 | 56                
+  objects.ts    |   95.83 |    83.33 |     100 |   95.83 | 50                
  src/interfaces |       0 |        0 |       0 |       0 |                   
   question.ts   |       0 |        0 |       0 |       0 |                   
 ----------------|---------|----------|---------|---------|-------------------
 
-Test Suites: 1 failed, 5 passed, 6 total
-Tests:       2 failed, 31 passed, 33 total
+Test Suites: 6 passed, 6 total
+Tests:       33 passed, 33 total
 Snapshots:   0 total
-Time:        3.716 s
+Time:        3.78 s
 Ran all test suites.
