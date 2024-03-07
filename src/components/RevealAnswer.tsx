@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Button } from "react-bootstrap";
 
 export function RevealAnswer(): JSX.Element {
