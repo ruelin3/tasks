@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Button } from "react-bootstrap";
 
 export function CycleHoliday(): JSX.Element {
@@ -12,12 +13,10 @@ export function CycleHoliday(): JSX.Element {
 
     const [currentHolidayIndex, setCurrentHolidayIndex] = useState(0);
 
-    // Function to advance to the next holiday alphabetically
     const advanceByAlphabet = () => {
         setCurrentHolidayIndex((currentHolidayIndex + 1) % holidays.length);
     };
 
-    // Function to advance to the next holiday in the year
     const advanceByYear = () => {
         setCurrentHolidayIndex((currentHolidayIndex + 1) % holidays.length);
     };
@@ -25,8 +24,8 @@ export function CycleHoliday(): JSX.Element {
     return (
         <div>
             <p>Holiday: {holidays[currentHolidayIndex].emoji}</p>
-            <button onClick={advanceByAlphabet}>Advance by Alphabet</button>
-            <button onClick={advanceByYear}>Advance by Year</button>
+            <Button onClick={advanceByAlphabet}>Advance by Alphabet</Button>
+            <Button onClick={advanceByYear}>Advance by Year</Button>
         </div>
     );
 }
