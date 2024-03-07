@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
@@ -20,18 +21,18 @@ export function StartAttempt(): JSX.Element {
         <div>
             <p>Attempts: {attempts}</p>
             <p>Quiz in progress: {quizInProgress ? "Yes" : "No"}</p>
-            <button
+            <Button
                 onClick={startQuiz}
                 disabled={quizInProgress || attempts === 0}
             >
                 Start Quiz
-            </button>
-            <button onClick={stopQuiz} disabled={!quizInProgress}>
+            </Button>
+            <Button onClick={stopQuiz} disabled={!quizInProgress}>
                 Stop Quiz
-            </button>
-            <button onClick={mulligan} disabled={quizInProgress}>
+            </Button>
+            <Button onClick={mulligan} disabled={quizInProgress}>
                 Mulligan
-            </button>
+            </Button>
         </div>
     );
 }
