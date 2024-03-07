@@ -12,39 +12,38 @@ export function d6(): number {
 }
 
 export function TwoDice(): JSX.Element {
-    const [leftDie, setLeftDie] = useState<number>(3);
-    const [rightDie, setRightDie] = useState<number>(6);
+    const [d1Value, setD1Value] = useState<number>(2);
+    const [d2Value, setD2Value] = useState<number>(1);
 
-    const rollLeftDie = () => {
-        const newValue = d6();
-        setLeftDie(newValue);
-    };
-
-    const rollRightDie = () => {
-        const newValue = d6();
-        setRightDie(newValue);
-    };
-
-    const checkWinLose = () => {
-        if (leftDie === rightDie) {
-            return "Win";
-        } else if (leftDie === 1 && rightDie === 1) {
-            return "Lose";
+    const outcome = () => {
+        if (d1Value === d2Value && d1Value === 1) {
+            return <span>You Lose</span>;
+        } else if (d1Value === d2Value && d1Value !== 1) {
+            return <span>You Win</span>;
         }
-        return null;
     };
 
     return (
-        <div>
+        <span>
+            <Button
+                onClick={() => {
+                    setD1Value(d6());
+                }}
+            >
+                Roll Left
+            </Button>
+            <Button
+                onClick={() => {
+                    setD2Value(d6());
+                }}
+            >
+                Roll Right
+            </Button>
             <div>
-                Left Die: <span data-testid="left-die">{leftDie}</span>
+                <span data-testid="left-die">{d1Value}</span>
+                <span data-testid="right-die">{d2Value}</span>
             </div>
-            <button onClick={rollLeftDie}>Roll Left</button>
-            <div>
-                Right Die: <span data-testid="right-die">{rightDie}</span>
-            </div>
-            <button onClick={rollRightDie}>Roll Right</button>
-            {checkWinLose()}
-        </div>
+            <div>{outcome()}</div>
+        </span>
     );
 }
